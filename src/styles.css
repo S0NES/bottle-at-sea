@@ -65,6 +65,11 @@ body {
   pointer-events: auto;
 }
 
+#ui > .landing,
+#ui > .nav {
+  pointer-events: none;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
