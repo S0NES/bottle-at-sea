@@ -1,0 +1,9 @@
+node_modules
+dist
+dist-server
+server/data
+.wrangler
+.git
+.env
+deploy/bottle-at-sea.env
+*.log

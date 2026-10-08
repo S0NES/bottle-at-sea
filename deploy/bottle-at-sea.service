@@ -1,0 +1,23 @@
+[Unit]
+Description=Bottle at Sea
+After=network.target
+
+[Service]
+User=bottle
+Group=bottle
+WorkingDirectory=/opt/bottle-at-sea
+EnvironmentFile=/etc/bottle-at-sea.env
+Environment=NODE_ENV=production PORT=8787 DB_PATH=/var/lib/bottle-at-sea/bottles.db
+ExecStart=/usr/bin/node dist-server/index.mjs
+Restart=on-failure
+RestartSec=3
+StateDirectory=bottle-at-sea
+
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/var/lib/bottle-at-sea
+
+[Install]
+WantedBy=multi-user.target

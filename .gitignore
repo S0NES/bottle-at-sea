@@ -1,0 +1,10 @@
+node_modules
+dist
+dist-server
+server/data
+.wrangler
+.dev.vars
+.env
+deploy/bottle-at-sea.env
+*.log
+.tmp-prod

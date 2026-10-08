@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0e24" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="description" content="Write an anonymous message, seal it in a glass bottle and throw it into the sea. Or find a bottle from a stranger." />
+    <meta property="og:title" content="Bottle at Sea" />
+    <meta property="og:description" content="Seal a few honest words in glass and let the tide carry them to a stranger. No accounts, no names, no tracking." />
+    <meta property="og:type" content="website" />
+    <title>Bottle at Sea</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0e24'/%3E%3Cpath d='M13 5h6v3l-1 2v2c3 1 5 3 5 6v7a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2v-7c0-3 2-5 5-6v-2l-1-2V5z' fill='%23ffb15e'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <canvas id="scene" aria-hidden="true"></canvas>
+    <div id="ui">
+      <!--
+        Rendered by the server: the title, the coffee link and the number of bottles at sea
+        arrive as plain HTML, so the page is meaningful before any script runs.
+        The server fills in #adrift (see server/app.ts and worker/index.ts); the script adopts this header.
+      -->
+      <header class="nav" id="nav">
+        <h1 class="brand" id="site-title">
+          <span class="icon" aria-hidden="true"
+            ><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 3h4v3l-1 1.5V9c2.4.8 4 2.7 4 5.2V19a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v-4.8C7 11.7 8.6 9.8 11 9V7.5L10 6V3z" />
+              <path d="M9.5 15h5" /></svg
+          ></span>
+          <span>Bottle at Sea</span>
+        </h1>
+        <div class="nav-right" id="nav-right">
+          <p class="adrift" id="adrift" hidden><span id="adrift-count">0</span> <span id="adrift-label">bottles adrift</span></p>
+          <a class="btn btn-glass nav-coffee" href="{{COFFEE_URL}}" target="_blank" rel="noopener noreferrer" aria-label="Buy me a coffee (opens in a new tab)">
+            <span class="icon" aria-hidden="true"
+              ><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 8h11v6a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5V8z" />
+                <path d="M16 9h2a2.5 2.5 0 0 1 0 5h-2" />
+                <path d="M8 3c0 1.2 1 1.2 1 2.4M12 3c0 1.2 1 1.2 1 2.4" /></svg
+            ></span>
+            <span class="nav-coffee-text">Buy me a coffee</span>
+          </a>
+        </div>
+      </header>
+    </div>
+    <noscript>
+      <p class="noscript-note" role="alert">Bottle at Sea draws its ocean with JavaScript and WebGL. Please enable JavaScript to throw and find bottles.</p>
+    </noscript>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

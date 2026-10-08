@@ -1,0 +1,48 @@
+{
+  "name": "bottle-at-sea",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Write an anonymous message, seal it in a bottle, throw it into a 3D ocean. Find a stranger's bottle.",
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c cyan,magenta \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:web": "vite",
+    "dev:api": "tsx watch server/index.ts",
+    "dev:worker": "npm run build && wrangler dev -c worker/wrangler.toml",
+    "build": "tsc --noEmit -p tsconfig.json && vite build",
+    "preview": "vite preview",
+    "start": "node dist-server/index.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.worker.json && tsc --noEmit -p tsconfig.server.json",
+    "test:api": "tsx scripts/api-test.ts",
+    "db:init:local": "wrangler d1 execute bottle-at-sea -c worker/wrangler.toml --local --file=worker/schema.sql",
+    "db:init:remote": "wrangler d1 execute bottle-at-sea -c worker/wrangler.toml --remote --file=worker/schema.sql",
+    "deploy": "npm run build && wrangler deploy -c worker/wrangler.toml",
+    "build:server": "esbuild server/index.ts --bundle --platform=node --format=esm --target=node22 --packages=external --outfile=dist-server/index.mjs",
+    "build:prod": "npm run typecheck && vite build && npm run build:server",
+    "start:dev": "tsx server/index.ts"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.2.0",
+    "express": "^4.21.2",
+    "gsap": "^3.13.0",
+    "nodemailer": "^7.0.13",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261006.1",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/express": "^4.17.23",
+    "@types/node": "^22.18.0",
+    "@types/nodemailer": "^8.0.2",
+    "@types/three": "^0.180.0",
+    "concurrently": "^9.2.1",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.5",
+    "wrangler": "^4.34.0",
+    "esbuild": "^0.25.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

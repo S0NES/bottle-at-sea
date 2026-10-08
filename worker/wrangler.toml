@@ -1,0 +1,29 @@
+name = "bottle-at-sea"
+main = "index.ts"
+compatibility_date = "2025-09-01"
+
+# Static frontend (the Vite build). The Worker runs first only for /api/*.
+[assets]
+directory = "../dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+run_worker_first = ["/api/*"]
+
+# 1. npx wrangler d1 create bottle-at-sea
+# 2. paste the database_id it prints below
+# 3. npm run db:init:remote
+[[d1_databases]]
+binding = "DB"
+database_name = "bottle-at-sea"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+
+# Daily cleanup of expired bottles and stale limiter rows.
+[triggers]
+crons = ["17 3 * * *"]
+
+# Optional: restrict CORS to your own origin (default is "*", fine for a public JSON API without cookies).
+# [vars]
+# ALLOWED_ORIGIN = "https://bottle-at-sea.example.com"
+#
+# Recommended: a secret that salts the daily IP hash.
+#   npx wrangler secret put SALT_SECRET

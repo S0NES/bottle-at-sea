@@ -1,0 +1,13 @@
+services:
+  bottle-at-sea:
+    build: .
+    restart: unless-stopped
+    env_file: deploy/bottle-at-sea.env
+    # Only reachable through your reverse proxy (see deploy/nginx.conf).
+    ports:
+      - "127.0.0.1:8787:8787"
+    volumes:
+      - bottle-data:/data
+
+volumes:
+  bottle-data:
